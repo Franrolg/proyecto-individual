@@ -1,0 +1,53 @@
+{% extends './base.html' %}
+
+{% block tareas %}
+<div class="container">
+  <h1 class="title">{{tarea.titulo}}</h1>
+  
+  <div class="row align-items-center">
+    <div class="col">
+      <div class="d-flex justify-content-end">
+        <div class="btn-group">
+          <button class="btn btn-secondary"><a class="text-dark text-decoration-none" href="?tipo_tareas=todas">Todas</a></button>
+          <button class="btn btn-danger"><a class="text-dark text-decoration-none" href="?tipo_tareas=pendiente">Pendiente</a></button>
+          <button class="btn btn-secondary"><a class="text-dark text-decoration-none" href="?tipo_tareas=en progreso">En Progreso</a></button>
+          <button class="btn btn-success"><a class="text-dark text-decoration-none" href="?tipo_tareas=completada">Completada</a></button>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-success"><a class="text-dark text-decoration-none" href="{% url 'crear_tarea' %}">+ Crear Tarea</a></button>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  <table class="task-table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Estado</th>
+        <th>Etiqueta</th>
+        <th>Fecha de Vencimiento</th>
+        <th>Prioridad</th>
+        <th>Detalle de Tarea</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tarea in tareas %}
+      <tr>
+        <td>{{ tarea.titulo }}</td>
+        <td>{{ tarea.estado }}</td>
+        <td>{{ tarea.etiqueta }}</td>
+        <td>{{ tarea.fecha_vencimiento }}</td>
+        <td>{{ tarea.prioridad }}</td>
+        <td><a href="{% url 'detalle_tarea' pk=tarea.id %}">info</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
